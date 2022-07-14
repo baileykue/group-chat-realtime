@@ -4,6 +4,10 @@
   --footer-background: rgb(243, 242, 242);
 }
 
+img {
+  width: 25em;
+}
+
 body {
   height: 100%;
   padding-bottom: 30px;
