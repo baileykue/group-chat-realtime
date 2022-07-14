@@ -1,31 +1,32 @@
 import { getUser, signOut } from './services/auth-service.js';
+import { getImagePosts } from './services/image-post.js';
+
 import { protectPage } from './utils.js';
-import createUser from './components/User.js';
+//import createUser from './components/User.js';
+import createImagePost from './components/ImagePost.js';
 
-// State
 let user = null;
+let imagePosts = [];
 
-// Action Handlers
 async function handlePageLoad() {
-    user = getUser();
-    protectPage(user);
+  user = getUser();
+  imagePosts = await getImagePosts();
 
-    display();
+  protectPage(user);
+
+  display();
 }
 
 async function handleSignOut() {
-    signOut();
+  signOut();
 }
 
-// Components 
-const User = createUser(
-    document.querySelector('#user'),
-    { handleSignOut }
-);
+//const User = createUser(document.querySelector('#user'), { handleSignOut });
+const PostList = createImagePost(document.getElementById('post-list'));
 
 function display() {
-    User({ user });
-
+  //User({ user });
+  PostList({ imagePosts });
 }
 
 handlePageLoad();
