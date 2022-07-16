@@ -25,8 +25,13 @@ async function handleSignOut() {
   signOut();
 }
 
-async function handleAddComment(comment) {
-  await addComment(comment);
+async function handleAddComment(comment, postId) {
+  const data = {
+    text_content: comment,
+    image_post_id: postId,
+    profile_id: profile.id,
+  };
+  await addComment(data);
   display();
 }
 

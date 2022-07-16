@@ -1,4 +1,5 @@
 import { getComments } from '../services/comment.js';
+import createAddComment from './AddComment.js';
 import createComments from './Comments.js';
 let comments = [];
 
@@ -54,13 +55,8 @@ function Post({ imagePost, commentDiv, handleAddComment }) {
   input.name = 'comment';
 
   form.append(input, button);
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    await handleAddComment(formData.get('comment'));
-    form.reset();
-  });
+  const AddComment = createAddComment(form, imagePost, { handleAddComment });
+  AddComment();
 
   div.append(img, p, commentButton, commentDiv, form);
 
