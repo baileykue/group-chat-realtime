@@ -34,3 +34,11 @@ body {
 main {
   height: 100%;
 }
+
+.hidden {
+  display: none;
+}
+
+.comment-icon {
+  width: 2rem;
+}

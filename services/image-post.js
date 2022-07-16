@@ -8,3 +8,13 @@ export async function getImagePosts() {
 
   return response.data;
 }
+
+export async function getImagePostById(id) {
+  const response = await client
+    .from('image-posts')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  return response.data;
+}
