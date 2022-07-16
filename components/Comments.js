@@ -1,5 +1,4 @@
 export default function createComments(list) {
-  console.log(list);
   return ({ comments }) => {
     list.innerHTML = '';
 
@@ -15,16 +14,16 @@ function Comment({ comment }) {
   const div = document.createElement('div');
   div.classList.add('comment');
 
-  //   const avatar = document.createElement('img');
-  //   avatar.src = comment.profile.avatar;
+  const avatar = document.createElement('img');
+  avatar.src = comment.profiles?.avatar;
 
-  //   const username = document.createElement('p');
-  //   username.textContent = comment.profile.username;
+  const username = document.createElement('p');
+  username.textContent = comment.profiles?.username;
 
   const commentText = document.createElement('p');
   commentText.textContent = comment.text_content;
 
-  div.append(commentText);
+  div.append(avatar, username, commentText);
 
   return div;
 }
