@@ -2,10 +2,11 @@ import { client } from './client.js';
 import { getProfileById } from './profile.js';
 import { getImagePostById } from './image-post.js';
 
-export async function getComments() {
+export async function getComments(postId) {
   const response = await client
     .from('comments')
     .select('*')
+    .eq('image_post_id', postId)
     .order('created_at', { ascending: false });
 
   return response.data;

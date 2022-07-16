@@ -1,3 +1,7 @@
+import { getComments } from '../services/comment.js';
+import createComments from './Comments.js';
+let comments = [];
+
 export default function createImagePost(postList, { handleAddComment }) {
   return ({ imagePosts }) => {
     postList.innerHTML = '';
@@ -26,13 +30,23 @@ function Post({ imagePost, handleAddComment }) {
   commentIcon.classList.add('comment-icon');
 
   commentButton.append(commentIcon);
-  commentButton.addEventListener('click', () => {
+  commentButton.addEventListener('click', async () => {
     form.classList.remove('hidden');
+    commentDiv.classList.remove('hidden');
     commentButton.classList.add('hidden');
+
+    comments = await getComments(imagePost.id);
+    const Comments = createComments(document.querySelectorAll('.comment-div'));
+    console.log(comments);
+    Comments({ comments });
   });
 
   const form = document.createElement('form');
   form.classList.add('hidden');
+
+  const commentDiv = document.createElement('div');
+  commentDiv.classList.add('comment-div');
+  commentDiv.classList.add('hidden');
 
   const button = document.createElement('button');
   button.textContent = 'Leave comment';
@@ -45,11 +59,11 @@ function Post({ imagePost, handleAddComment }) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
-    handleAddComment(formData.get('comment'));
+    await handleAddComment(formData.get('comment'));
     form.reset();
   });
 
-  div.append(img, p, commentButton, form);
+  div.append(img, p, commentButton, commentDiv, form);
 
   return div;
 }
