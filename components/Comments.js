@@ -10,7 +10,6 @@ export default function createComments(list) {
 }
 
 function Comment({ comment }) {
-  console.log(comment);
   const div = document.createElement('div');
   div.classList.add('comment');
 
@@ -18,6 +17,7 @@ function Comment({ comment }) {
   avatar.src = comment.profiles?.avatar;
 
   const username = document.createElement('p');
+  username.classList.add('comment-username');
   username.textContent = comment.profiles?.username;
 
   const commentText = document.createElement('p');

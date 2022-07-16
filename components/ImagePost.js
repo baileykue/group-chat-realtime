@@ -14,7 +14,7 @@ export default function createImagePost(postList, { handleAddComment }) {
       commentDiv.classList.add('hidden');
       const Comments = createComments(commentDiv);
 
-      const post = Post({ imagePost, commentDiv, handleAddComment });
+      const post = Post({ comments, imagePost, commentDiv, handleAddComment });
       Comments({ comments });
 
       postList.append(post);
@@ -22,7 +22,7 @@ export default function createImagePost(postList, { handleAddComment }) {
   };
 }
 
-function Post({ imagePost, commentDiv, handleAddComment }) {
+function Post({ comments, imagePost, commentDiv, handleAddComment }) {
   const div = document.createElement('div');
   div.classList.add('post-card');
 
@@ -55,7 +55,9 @@ function Post({ imagePost, commentDiv, handleAddComment }) {
   input.name = 'comment';
 
   form.append(input, button);
-  const AddComment = createAddComment(form, imagePost, { handleAddComment });
+  const AddComment = createAddComment(form, imagePost, comments, {
+    handleAddComment,
+  });
   AddComment();
 
   div.append(img, p, commentButton, commentDiv, form);

@@ -12,6 +12,15 @@ export async function getComments(postId) {
   return response.data;
 }
 
+export async function getAllComments() {
+  const response = await client
+    .from('comments')
+    .select(`*, profiles(*)`)
+    .order('created_at', { ascending: false });
+
+  return response.data;
+}
+
 export async function addComment(comment) {
   const response = await client.from('comments').insert(comment).single();
 
