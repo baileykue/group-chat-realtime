@@ -3,17 +3,25 @@ import createComments from './Comments.js';
 let comments = [];
 
 export default function createImagePost(postList, { handleAddComment }) {
-  return ({ imagePosts }) => {
+  return async ({ imagePosts }) => {
     postList.innerHTML = '';
 
     for (const imagePost of imagePosts) {
-      const post = Post({ imagePost, handleAddComment });
+      comments = await getComments(imagePost.id);
+      const commentDiv = document.createElement('div');
+      commentDiv.classList.add('comment-div');
+      commentDiv.classList.add('hidden');
+      const Comments = createComments(commentDiv);
+
+      const post = Post({ imagePost, commentDiv, handleAddComment });
+      Comments({ comments });
+
       postList.append(post);
     }
   };
 }
 
-function Post({ imagePost, handleAddComment }) {
+function Post({ imagePost, commentDiv, handleAddComment }) {
   const div = document.createElement('div');
   div.classList.add('post-card');
 
@@ -34,19 +42,10 @@ function Post({ imagePost, handleAddComment }) {
     form.classList.remove('hidden');
     commentDiv.classList.remove('hidden');
     commentButton.classList.add('hidden');
-
-    comments = await getComments(imagePost.id);
-    const Comments = createComments(document.querySelectorAll('.comment-div'));
-    console.log(comments);
-    Comments({ comments });
   });
 
   const form = document.createElement('form');
   form.classList.add('hidden');
-
-  const commentDiv = document.createElement('div');
-  commentDiv.classList.add('comment-div');
-  commentDiv.classList.add('hidden');
 
   const button = document.createElement('button');
   button.textContent = 'Leave comment';
