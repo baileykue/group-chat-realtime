@@ -1,5 +1,5 @@
 :root {
-  --background: rgb(224, 234, 247);
+  --background: rgb(21, 22, 24);
   --header-background: white;
   --footer-background: rgb(243, 242, 242);
 }
@@ -25,6 +25,17 @@ body {
 #user a {
   font-size: 0.8em;
   color: steelblue;
+}
+
+#post-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden {
@@ -55,4 +66,21 @@ main {
 .comment {
   display: flex;
   flex-direction: row;
+}
+
+.post-card .comment-icon {
+  position: relative;
+  left: 20vw;
+  bottom: 6vh;
+  background: transparent;
+  border: none;
+}
+
+.leave-comment {
+  color: white;
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 8px;
+  margin-left: 15vw;
 }

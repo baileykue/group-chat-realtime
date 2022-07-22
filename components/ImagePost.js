@@ -49,6 +49,7 @@ function Post({ comments, imagePost, commentDiv, handleAddComment }) {
   form.classList.add('hidden');
 
   const button = document.createElement('button');
+  button.classList.add('leave-comment');
   button.textContent = 'Leave comment';
 
   const input = document.createElement('input');
